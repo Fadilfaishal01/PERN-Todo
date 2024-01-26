@@ -1,5 +1,4 @@
 const db = require("./../db");
-const UUID = require("uuid-int");
 
 db.connect()
 	.then((res) => {
@@ -104,9 +103,29 @@ const updateTodos = async (req, res) => {
 	}
 };
 
+const deleteTodos = async (req, res) => {
+	const { id } = req.body;
+
+	try {
+		db.query("DELETE FROM todos WHERE id=$1", [id]);
+
+		return res.status(200).json({
+			status: 200,
+			message: "Successfully Delete Data Todos",
+		});
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({
+			status: 500,
+			message: "Error Delete Data Todos : " + error.message,
+		});
+	}
+};
+
 module.exports = {
 	getAllTodos,
 	getTodosById,
 	createTodos,
 	updateTodos,
+	deleteTodos,
 };

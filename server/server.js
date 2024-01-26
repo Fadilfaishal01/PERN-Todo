@@ -11,6 +11,7 @@ const {
 	getTodosById,
 	createTodos,
 	updateTodos,
+	deleteTodos,
 } = require("./controller/TodosController");
 
 app.use(cors());
@@ -18,6 +19,7 @@ app.get("/todos/:email", getAllTodos);
 app.get("/todos/:id", getTodosById);
 app.post("/todos/create", createTodos);
 app.post("/todos/update", updateTodos);
+app.post("/todos/delete", deleteTodos);
 
 app.listen(PORT, function () {
 	console.log(`Successfully Server Running in Port : ${PORT}`);
