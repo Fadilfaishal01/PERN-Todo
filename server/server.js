@@ -13,13 +13,20 @@ const {
 	updateTodos,
 	deleteTodos,
 } = require("./controller/TodosController");
+const { signIn, signUp } = require("./controller/UserController");
 
 app.use(cors());
+
+// Auth
+app.post("/signIn", signIn);
+app.post("/signUp", signUp);
+
+// Route Todos
 app.get("/todos/:email", getAllTodos);
 app.get("/todos/:id", getTodosById);
 app.post("/todos/create", createTodos);
-app.post("/todos/update", updateTodos);
-app.post("/todos/delete", deleteTodos);
+app.patch("/todos/update", updateTodos);
+app.delete("/todos/delete", deleteTodos);
 
 app.listen(PORT, function () {
 	console.log(`Successfully Server Running in Port : ${PORT}`);
